@@ -65,4 +65,14 @@ export class Tool {
 			// Else single click action
 		}
 	}
+
+	/**
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {Types.PixelCanvasContext} context
+	 */
+	// eslint-disable-next-line no-unused-vars
+	onMouseLeave(x, y, context) {
+		context.clear();
+	}
 }

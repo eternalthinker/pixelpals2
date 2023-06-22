@@ -5,12 +5,17 @@
 	// @ts-ignore
 	// eslint-disable-next-line no-unused-vars
 	import * as Types from '../components/types';
-	import { Pencil } from '../tools/pencil';
 
 	export let maxWidth = 0;
 	export let maxHeight = 0;
-	export let color;
-	export let tool;
+	/**
+	 * @type {string}
+	 */
+	export let color = '#000000';
+	/**
+	 * @type { import('../tools/tool').Tool | undefined}
+	 */
+	export let tool = undefined;
 
 	/**
 	 * @type {number}
@@ -131,7 +136,7 @@
 	const handleMouseDown = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseDown(x, y, getPixelCanvasContext());
+		tool?.onMouseDown(x, y, getPixelCanvasContext());
 	};
 
 	/**
@@ -140,7 +145,7 @@
 	const handleMouseMove = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseMove(x, y, getPixelCanvasContext());
+		tool?.onMouseMove(x, y, getPixelCanvasContext());
 	};
 
 	/**
@@ -149,7 +154,16 @@
 	const handleMouseUp = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseUp(x, y, getPixelCanvasContext());
+		tool?.onMouseUp(x, y, getPixelCanvasContext());
+	};
+
+	/**
+	 * @param {MouseEvent} e
+	 */
+	const handleMouseLeave = (e) => {
+		const { offsetX, offsetY } = e;
+		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
+		tool?.onMouseLeave(x, y, getPixelCanvasContext());
 	};
 </script>
 
@@ -161,7 +175,7 @@
 	on:mousedown={handleMouseDown}
 	on:mousemove={handleMouseMove}
 	on:mouseup={handleMouseUp}
-	on:mouseleave={handleMouseUp}
+	on:mouseleave={handleMouseLeave}
 />
 <slot />
 

@@ -3,12 +3,16 @@ import { networkStore } from '../network/networkStore';
 import { Tool, ToolType } from './tool';
 
 export class ColorPicker extends Tool {
-	constructor() {
+	/**
+	 * @param {(color: string) => void} onColorChange
+	 */
+	constructor(onColorChange) {
 		super();
 		this.name = 'ColorPicker';
 		this.type = ToolType.COLOR_PICKER;
 		this.drawing = false;
 		this.dragging = false;
+		this.onColorChange = onColorChange;
 	}
 
 	/**
@@ -19,14 +23,14 @@ export class ColorPicker extends Tool {
 			this.dragging = true;
 		} else {
 			context.clear();
-			context.setMarker(x, y, true);
+			context.setMarker(x, y, false);
 		}
 	}
 
 	/**
 	 * @type {Tool['onMouseUp']}
 	 */
-	onMouseUp(x, y, context) {
+	onMouseUp(x, y) {
 		if (this.drawing) {
 			this.drawing = false;
 			// No mouse up action if mouse was being dragged
@@ -35,8 +39,7 @@ export class ColorPicker extends Tool {
 			} else {
 				const key = pixelCoordsToNetworkKey(x, y);
 				const color = networkStore.getPixel(Number(key));
-				console.log('Picked color', color);
-				// TODO: Set a color store
+				this.onColorChange(color);
 			}
 		}
 		// User's mouse is up, clear the buffer layer

@@ -11,18 +11,21 @@
 	let color = '#ff0000';
 
 	const pencil = new Pencil();
-	const colorPicker = new ColorPicker();
+	const onColor = (/** @type {string} */ newColor) => (color = newColor);
+	const colorPicker = new ColorPicker(onColor);
 
 	let tool = pencil;
 
 	/**
-	 *
 	 * @param {CustomEvent<{color: string}>} param0
 	 */
 	const onColorChange = ({ detail }) => {
 		color = detail.color;
 	};
 
+	/**
+	 * @param {CustomEvent<{tool: import('./tools/tool').Tool}>} param0
+	 */
 	const onToolChange = ({ detail }) => {
 		tool = detail.tool;
 	};

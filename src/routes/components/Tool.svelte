@@ -23,12 +23,19 @@
 </script>
 
 <button
-	class="h-8 w-8 rounded border border-gray-800 {selected
-		? 'bg-gray-400 shadow-inner shadow-gray-800'
-		: 'bg-gray-300'}
-    hover:border-2 hover:bg-gray-200"
+	class="h-10 w-10 rounded border border-gray-800 {selected
+		? 'selected bg-gray-400'
+		: 'bg-gray-300 hover:border-2 hover:bg-gray-200'}"
+	aria-pressed={selected}
+	aria-current={selected ? true : undefined}
 	on:click={onClick}
 >
 	<i class="{getIconClasses()} text-black" />
 	<span class="sr-only">Select the {tool.name} tool</span>
 </button>
+
+<style lang="postcss">
+	.selected {
+		box-shadow: inset -1px 2px 1px theme(colors.gray.800);
+	}
+</style>
