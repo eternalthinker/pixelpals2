@@ -26,6 +26,7 @@ export function getAllNetworkData() {
 			return;
 		}
 
+		/** @type {string[]} */
 		const allCanvasData = snapshot.val();
 		return allCanvasData;
 	});

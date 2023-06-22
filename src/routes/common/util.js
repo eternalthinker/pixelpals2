@@ -9,7 +9,7 @@ export function pixelCoordsToNetworkKey(x, y) {
 }
 
 /**
- * @param {string} keyStr
+ * @param {string | number} keyStr
  */
 export function networkKeyToPixelCoords(keyStr) {
 	const key = Number(keyStr);

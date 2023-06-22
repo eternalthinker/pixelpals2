@@ -13,7 +13,6 @@
 		const { height, width } = container.getBoundingClientRect();
 		maxHeight = height;
 		maxWidth = width;
-		console.log('container', maxWidth, maxHeight);
 	});
 </script>
 

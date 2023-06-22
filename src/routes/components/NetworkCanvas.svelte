@@ -5,6 +5,7 @@
 	import { tick } from 'svelte';
 	import { getAllNetworkData, initializeNetwork, registerOnPixelChange } from '../network/network';
 	import { networkKeyToPixelCoords } from '../common/util';
+	import { networkStore } from '../network/networkStore';
 
 	const { setPixel } = getContext(pixelCanvasContextKey);
 
@@ -16,7 +17,9 @@
 			return;
 		}
 		const color = snapshot.val();
-		const { x, y } = networkKeyToPixelCoords(snapshot.key);
+		const key = Number(snapshot.key);
+		const { x, y } = networkKeyToPixelCoords(key);
+		networkStore.setPixel(key, color);
 		setPixel(x, y, color);
 	};
 
@@ -29,9 +32,9 @@
 
 		const data = await getAllNetworkData();
 		if (data != null) {
-			Object.keys(data).forEach((keyStr) => {
-				const { x, y } = networkKeyToPixelCoords(keyStr);
-				const color = data[keyStr];
+			networkStore.setAllData(data);
+			data.forEach((color, key) => {
+				const { x, y } = networkKeyToPixelCoords(key);
 				setPixel(x, y, color);
 			});
 		}
