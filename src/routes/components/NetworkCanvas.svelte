@@ -22,8 +22,9 @@
 
 	onMount(async () => {
 		initializeNetwork();
-		// Wait until canvas size correction
+		// Wait until container mount
 		await tick();
+		// Wait until canvas size correction
 		await tick();
 
 		const data = await getAllNetworkData();

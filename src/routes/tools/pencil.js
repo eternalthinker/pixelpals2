@@ -15,13 +15,19 @@ export class Pencil extends Tool {
 	 */
 	onMouseMove(x, y, context) {
 		if (this.drawing) {
-			this.dragging = true;
+			if (!this.dragging) {
+				context.clear();
+				this.dragging = true;
+			}
 			context.setPixel(x, y);
 			// TODO: Some logic to clear these pixels after x milliseconds.
 			//  Care to be taken to not clear if something was recently
 			//  written on this pixel again.
 			const key = pixelCoordsToNetworkKey(x, y);
 			setNetworkPixel(key, context.color);
+		} else {
+			context.clear();
+			context.setMarker(x, y, true);
 		}
 	}
 
@@ -40,8 +46,8 @@ export class Pencil extends Tool {
 				const key = pixelCoordsToNetworkKey(x, y);
 				setNetworkPixel(key, context.color);
 			}
-			// User's mouse is up, clear the buffer layer
-			context.clear();
 		}
+		// User's mouse is up, clear the buffer layer
+		context.clear();
 	}
 }

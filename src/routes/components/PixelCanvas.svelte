@@ -11,7 +11,13 @@
 	export let maxHeight = 0;
 	export let color = '#333333';
 
+	/**
+	 * @type {number}
+	 */
 	export let widthPixels;
+	/**
+	 * @type {number}
+	 */
 	export let heightPixels;
 
 	let width = widthPixels;
@@ -46,8 +52,43 @@
 		context.fill();
 	};
 
+	/**
+	 * @type {Types.SetMarkerFn}
+	 */
+	const setMarker = (x, y, showColor = true) => {
+		const px = Math.floor(x);
+		const py = Math.floor(y);
+		if (!(0 <= px && px < widthPixels && 0 <= py && py < heightPixels)) {
+			return;
+		}
+		if (context == null) {
+			return;
+		}
+		if (showColor) {
+			setPixel(x, y);
+		}
+		context.strokeStyle = '#000000';
+		let lineWidth = 2;
+		context.lineWidth = lineWidth;
+		context.strokeRect(px * pixelSize, py * pixelSize, pixelSize, pixelSize);
+	};
+
 	const clear = () => {
 		context?.clearRect(0, 0, width, height);
+	};
+
+	/**
+	 * A collection of useful context, usually used by Tools.
+	 * Different from canvas 2d context, or Svelte component context.
+	 * @returns {Types.PixelCanvasContext}
+	 */
+	const getPixelCanvasContext = () => {
+		return {
+			setPixel,
+			setMarker,
+			clear,
+			color
+		};
 	};
 
 	setContext(pixelCanvasContextKey, { setPixel, clear });
@@ -91,7 +132,7 @@
 	const handleMouseDown = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseDown(x, y, { setPixel, clear, color });
+		tool.onMouseDown(x, y, getPixelCanvasContext());
 	};
 
 	/**
@@ -100,7 +141,7 @@
 	const handleMouseMove = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseMove(x, y, { setPixel, clear, color });
+		tool.onMouseMove(x, y, getPixelCanvasContext());
 	};
 
 	/**
@@ -109,12 +150,12 @@
 	const handleMouseUp = (e) => {
 		const { offsetX, offsetY } = e;
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
-		tool.onMouseUp(x, y, { setPixel, clear, color });
+		tool.onMouseUp(x, y, getPixelCanvasContext());
 	};
 </script>
 
 <canvas
-	class="absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950"
+	class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto cursor-none border-2 border-gray-950"
 	{width}
 	{height}
 	bind:this={canvas}
@@ -124,3 +165,9 @@
 	on:mouseleave={handleMouseUp}
 />
 <slot />
+
+<style>
+	.pixelCanvas {
+		image-rendering: pixelated;
+	}
+</style>
