@@ -4,8 +4,16 @@
 	import NetworkCanvas from './components/NetworkCanvas.svelte';
 	import Palette from './components/Palette.svelte';
 	import { HEIGHT_PIXELS, PALETTE_COLORS, WIDTH_PIXELS } from './common/config';
+	import Tool from './components/Tool.svelte';
+	import { Pencil } from './tools/pencil';
+	import { ColorPicker } from './tools/colorPicker';
 
 	let color = '#ff0000';
+
+	const pencil = new Pencil();
+	const colorPicker = new ColorPicker();
+
+	let tool = pencil;
 
 	/**
 	 *
@@ -13,6 +21,10 @@
 	 */
 	const onColorChange = ({ detail }) => {
 		color = detail.color;
+	};
+
+	const onToolChange = ({ detail }) => {
+		tool = detail.tool;
 	};
 </script>
 
@@ -33,13 +45,18 @@
 					{maxWidth}
 					{maxHeight}
 					{color}
+					{tool}
 					widthPixels={WIDTH_PIXELS}
 					heightPixels={HEIGHT_PIXELS}
 				/>
 			</CanvasContainer>
 		</div>
 
-		<div class="sideBar p-4">
+		<div class="sideBar flex flex-col gap-4 p-4">
+			<section class="flex flex-wrap justify-center gap-2 rounded bg-white p-2">
+				<Tool tool={pencil} on:tool={onToolChange} selected={tool.type === pencil.type} />
+				<Tool tool={colorPicker} on:tool={onToolChange} selected={tool.type === colorPicker.type} />
+			</section>
 			<Palette colors={PALETTE_COLORS} activeColor={color} on:color={onColorChange} />
 		</div>
 	</main>

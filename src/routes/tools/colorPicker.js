@@ -1,12 +1,12 @@
 import { pixelCoordsToNetworkKey } from '../common/util';
-import { setNetworkPixel } from '../network/network';
+import { networkStore } from '../network/networkStore';
 import { Tool, ToolType } from './tool';
 
-export class Pencil extends Tool {
+export class ColorPicker extends Tool {
 	constructor() {
 		super();
-		this.name = 'Pencil';
-		this.type = ToolType.PENCIL;
+		this.name = 'ColorPicker';
+		this.type = ToolType.COLOR_PICKER;
 		this.drawing = false;
 		this.dragging = false;
 	}
@@ -16,16 +16,7 @@ export class Pencil extends Tool {
 	 */
 	onMouseMove(x, y, context) {
 		if (this.drawing) {
-			if (!this.dragging) {
-				context.clear();
-				this.dragging = true;
-			}
-			context.setPixel(x, y);
-			// TODO: Some logic to clear these pixels after x milliseconds.
-			//  Care to be taken to not clear if something was recently
-			//  written on this pixel again.
-			const key = pixelCoordsToNetworkKey(x, y);
-			setNetworkPixel(key, context.color);
+			this.dragging = true;
 		} else {
 			context.clear();
 			context.setMarker(x, y, true);
@@ -42,13 +33,13 @@ export class Pencil extends Tool {
 			if (this.dragging) {
 				this.dragging = false;
 			} else {
-				// We are not setting the local pixel here as it is
-				// immediately being cleared.
 				const key = pixelCoordsToNetworkKey(x, y);
-				setNetworkPixel(key, context.color);
+				const color = networkStore.getPixel(Number(key));
+				console.log('Picked color', color);
+				// TODO: Set a color store
 			}
 		}
 		// User's mouse is up, clear the buffer layer
-		context.clear();
+		// context.clear();
 	}
 }

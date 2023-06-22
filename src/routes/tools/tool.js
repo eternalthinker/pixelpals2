@@ -21,6 +21,7 @@ export class Tool {
 		if (this.constructor === Tool) {
 			throw new Error('Tool is an abstract class');
 		}
+		this.name = 'Undefined';
 		this.type = ToolType.NONE;
 		this.drawing = false;
 		this.dragging = false;

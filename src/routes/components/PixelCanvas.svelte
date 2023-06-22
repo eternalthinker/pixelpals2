@@ -9,7 +9,8 @@
 
 	export let maxWidth = 0;
 	export let maxHeight = 0;
-	export let color = '#333333';
+	export let color;
+	export let tool;
 
 	/**
 	 * @type {number}
@@ -123,8 +124,6 @@
 			y: Math.floor(y / pixelSize) - (y % pixelSize ? 0 : 1)
 		};
 	};
-
-	const tool = new Pencil();
 
 	/**
 	 * @param {MouseEvent} e
