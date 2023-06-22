@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { ToolType } from '../tools/tool';
 	const dispatch = createEventDispatcher();
 
@@ -20,12 +20,40 @@
 				return 'fa-solid fa-eye-dropper';
 		}
 	};
+
+	const getKeyMapping = () => {
+		switch (tool.type) {
+			case ToolType.PENCIL:
+				return 'b';
+			case ToolType.COLOR_PICKER:
+				return 'c';
+		}
+	};
+
+	const keyBoardTrigger = getKeyMapping();
+
+	/**
+	 * @param {KeyboardEvent} e
+	 */
+	const onKeyPress = (e) => {
+		if (e.key === keyBoardTrigger) {
+			onClick();
+		}
+	};
+
+	onMount(() => {
+		window.addEventListener('keyup', onKeyPress);
+
+		return () => {
+			window.removeEventListener('keyup', onKeyPress);
+		};
+	});
 </script>
 
 <button
 	class="h-10 w-10 rounded border border-gray-800 {selected
 		? 'selected bg-gray-400'
-		: 'bg-gray-300 hover:border-2 hover:bg-gray-200'}"
+		: 'bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200'}"
 	aria-pressed={selected}
 	aria-current={selected ? true : undefined}
 	on:click={onClick}

@@ -18,14 +18,14 @@ class NetworkStore {
 	 * @param {string} color
 	 */
 	setPixel(key, color) {
-		this._data[key] = color;
+		this._data[key] = color.toLowerCase();
 	}
 
 	/**
 	 * @param {number} key
 	 */
 	getPixel(key) {
-		return this._data[key];
+		return this._data[key].toLowerCase();
 	}
 }
 

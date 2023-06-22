@@ -32,13 +32,24 @@
 </script>
 
 <div class="flex h-full flex-col bg-gray-500">
-	<header class="flex items-center bg-emerald-600 px-4 py-2">
-		<h1 class="text-2xl font-bold text-emerald-50">PixelPals</h1>
-		<h3 class="ml-4 text-emerald-100">A collaborative pixel canvas</h3>
+	<header class="flex items-center justify-evenly bg-gray-800 px-8 py-2">
+		<div class="flex flex-grow items-center gap-4">
+			<h1 class="font-display text-4xl font-bold text-white">PixelPals</h1>
+			<h3 class="pt-2 font-body text-lg text-white">A collaborative pixel canvas</h3>
+		</div>
+		<div class="flex-shrink">
+			<p class="pt-2 font-body text-sm text-gray-100">
+				Made by <a
+					class="underline hover:text-teal-400"
+					href="https://github.com/eternalthinker"
+					target="_blank">eternalthinker</a
+				>
+			</p>
+		</div>
 	</header>
 
-	<main class="box-border grid h-full flex-auto grid-cols-5">
-		<div class="canvasBackground col-span-4 bg-gray-600">
+	<main class="box-border grid h-full flex-auto grid-cols-6 px-10">
+		<div class="canvasBackground col-span-5">
 			<CanvasContainer let:maxWidth let:maxHeight>
 				<PixelCanvas {maxWidth} {maxHeight} widthPixels={WIDTH_PIXELS} heightPixels={HEIGHT_PIXELS}>
 					<NetworkCanvas />
@@ -55,7 +66,7 @@
 			</CanvasContainer>
 		</div>
 
-		<div class="sideBar flex flex-col gap-4 p-4">
+		<div class="sideBar flex flex-col justify-center gap-4 p-4">
 			<section class="flex flex-wrap justify-center gap-2 rounded bg-white p-2">
 				<Tool tool={pencil} on:tool={onToolChange} selected={tool.type === pencil.type} />
 				<Tool tool={colorPicker} on:tool={onToolChange} selected={tool.type === colorPicker.type} />

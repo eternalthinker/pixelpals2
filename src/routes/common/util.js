@@ -17,3 +17,15 @@ export function networkKeyToPixelCoords(keyStr) {
 	const y = Math.floor(key / WIDTH_PIXELS);
 	return { x, y };
 }
+
+/**
+ * @param {string} query
+ */
+export function getURLParameter(query) {
+	const match = RegExp(`${query}=(.+?)(&|$)`).exec(location.search);
+	if (match == null) {
+		return;
+	}
+	const result = decodeURI(match[1]);
+	return result;
+}

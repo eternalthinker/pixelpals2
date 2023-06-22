@@ -10,9 +10,9 @@
 
 	$: hexColors = colors.map((color) => {
 		if (color.startsWith('#')) {
-			return color;
+			return color.toLowerCase();
 		}
-		return `#${color}`;
+		return `#${color.toLowerCase()}`;
 	});
 
 	/**
@@ -28,12 +28,41 @@
 	{#each hexColors as color}
 		<button
 			on:click={getOnClick(color)}
-			class="h-6 w-6 shrink-0 cursor-pointer rounded-sm {color === activeColor
-				? 'border-2'
-				: 'border'} border-gray-800 hover:border-4 focus:border-4"
+			class="color relative h-6 w-6 shrink-0 cursor-pointer overflow-hidden rounded-sm {color ===
+				activeColor && 'selected'} hover:hover focus:hover border border-gray-800"
 			style:background={color}
+			aria-current={color === activeColor}
+			aria-pressed={color === activeColor}
 		>
 			<span class="sr-only">Select the color {color}</span>
 		</button>
 	{/each}
 </section>
+
+<style lang="postcss">
+	.color.selected {
+		box-shadow: 0px 0px 0px 1px theme(colors.gray.800), inset 0px 0px 1px 2px theme(colors.white);
+	}
+
+	.color:hover,
+	.color:focus {
+		box-shadow: 0px 0px 0px 2px theme(colors.gray.800), inset 0px 0px 1px 2px theme(colors.white);
+		outline: none;
+	}
+
+	.selected:after,
+	.selected:before {
+		@apply absolute left-0 top-0 h-0 w-0;
+		content: '';
+	}
+
+	.selected:before {
+		border-width: 5px;
+		border-color: theme(colors.white) transparent transparent theme(colors.white);
+	}
+
+	.selected:after {
+		border-width: 4px;
+		border-color: theme(colors.black) transparent transparent theme(colors.black);
+	}
+</style>

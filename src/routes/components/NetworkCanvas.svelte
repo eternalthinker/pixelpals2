@@ -4,8 +4,9 @@
 	import { onMount } from 'svelte';
 	import { tick } from 'svelte';
 	import { getAllNetworkData, initializeNetwork, registerOnPixelChange } from '../network/network';
-	import { networkKeyToPixelCoords } from '../common/util';
+	import { getURLParameter, networkKeyToPixelCoords } from '../common/util';
 	import { networkStore } from '../network/networkStore';
+	import { CANVAS_ID_KEY } from '../common/config';
 
 	const { setPixel } = getContext(pixelCanvasContextKey);
 
@@ -24,7 +25,8 @@
 	};
 
 	onMount(async () => {
-		initializeNetwork();
+		const canvasId = getURLParameter(CANVAS_ID_KEY);
+		initializeNetwork(canvasId);
 		// Wait until container mount
 		await tick();
 		// Wait until canvas size correction

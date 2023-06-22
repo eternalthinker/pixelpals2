@@ -5,6 +5,7 @@
 	// @ts-ignore
 	// eslint-disable-next-line no-unused-vars
 	import * as Types from '../components/types';
+	import { ToolType } from '../tools/tool';
 
 	export let maxWidth = 0;
 	export let maxHeight = 0;
@@ -103,7 +104,7 @@
 		context = canvas.getContext('2d');
 		await tick(); // Await container mount
 		handleSize();
-		await tick(); // Await size correction
+		//await tick(); // Await size correction
 	});
 
 	$: if (context) {
@@ -116,7 +117,7 @@
 		pixelSize = Math.min(widthPixelSize, heightPixelSize);
 		width = pixelSize * widthPixels;
 		height = pixelSize * heightPixels;
-		console.log('size', maxWidth, maxHeight, pixelSize, width, height);
+		// console.log('size', maxWidth, maxHeight, pixelSize, width, height);
 	};
 
 	/**
@@ -165,10 +166,24 @@
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
 		tool?.onMouseLeave(x, y, getPixelCanvasContext());
 	};
+
+	// TODO: Move this data to the Tool
+	const getCursorClass = (/** @type {import("../tools/tool").Tool | undefined} */ tool) => {
+		switch (tool?.type) {
+			case ToolType.PENCIL:
+				return 'pencil';
+			case ToolType.COLOR_PICKER:
+				return 'colorPicker';
+			default:
+				return '';
+		}
+	};
+
+	$: cursorClass = getCursorClass(tool);
 </script>
 
 <canvas
-	class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto cursor-none border-2 border-gray-950"
+	class="pixelCanvas {cursorClass} absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950"
 	{width}
 	{height}
 	bind:this={canvas}
@@ -182,5 +197,13 @@
 <style>
 	.pixelCanvas {
 		image-rendering: pixelated;
+	}
+
+	.pencil {
+		cursor: url('/icons/pencil.svg') 0 20, default;
+	}
+
+	.colorPicker {
+		cursor: url('/icons/colorpicker.svg') 0 20, default;
 	}
 </style>

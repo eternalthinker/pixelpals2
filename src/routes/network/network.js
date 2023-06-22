@@ -28,7 +28,7 @@ export function getAllNetworkData() {
 
 		/** @type {string[]} */
 		const allCanvasData = snapshot.val();
-		return allCanvasData;
+		return allCanvasData.map((color) => color.toLowerCase());
 	});
 }
 
