@@ -19,15 +19,9 @@
 			onClick();
 		}
 	};
-
-	onMount(() => {
-		window.addEventListener('keyup', onKeyPress);
-
-		return () => {
-			window.removeEventListener('keyup', onKeyPress);
-		};
-	});
 </script>
+
+<svelte:window on:keyup={onKeyPress} />
 
 <button
 	class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 {selected

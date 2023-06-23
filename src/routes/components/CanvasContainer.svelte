@@ -21,14 +21,10 @@
 
 	onMount(() => {
 		handleSize();
-
-		window.addEventListener('resize', handleSizeDebounced);
-
-		return () => {
-			window.removeEventListener('resize', handleSizeDebounced);
-		};
 	});
 </script>
+
+<svelte:window on:resize={handleSizeDebounced} />
 
 <div class="relative h-full min-h-[360px]" bind:this={container}>
 	<slot {maxWidth} {maxHeight} />
