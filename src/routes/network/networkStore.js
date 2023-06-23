@@ -6,6 +6,10 @@ class NetworkStore {
 		this._data = [];
 	}
 
+	getAllData() {
+		return this._data;
+	}
+
 	/**
 	 * @param {string[]} data
 	 */

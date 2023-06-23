@@ -10,6 +10,11 @@
 
 	const { setPixel } = getContext(pixelCanvasContextKey);
 
+	/** @type {number} */
+	export let width;
+	/** @type {number} */
+	export let height;
+
 	/**
 	 * @param  {import("@firebase/database").DataSnapshot} snapshot
 	 */
@@ -24,23 +29,35 @@
 		setPixel(x, y, color);
 	};
 
-	onMount(async () => {
-		const canvasId = getURLParameter(CANVAS_ID_KEY);
-		initializeNetwork(canvasId);
-		// Wait until container mount
-		await tick();
-		// Wait until canvas size correction
-		await tick();
-
-		const data = await getAllNetworkData();
+	/**
+	 * @param {string[] | undefined} data
+	 * @param {number} _width
+	 * @param {number} _height
+	 */
+	const renderNetworkData = (data, _width, _height) => {
+		if (data == null) {
+			return;
+		}
 		if (data != null) {
-			networkStore.setAllData(data);
 			data.forEach((color, key) => {
 				const { x, y } = networkKeyToPixelCoords(key);
 				setPixel(x, y, color);
 			});
 		}
+	};
+
+	onMount(async () => {
+		const canvasId = getURLParameter(CANVAS_ID_KEY);
+		initializeNetwork(canvasId);
+
+		const data = await getAllNetworkData();
+		data && networkStore.setAllData(data);
+		renderNetworkData(data, width, height);
 
 		registerOnPixelChange(onPixelChange);
 	});
+
+	// width, height are unused. They're supplied here so that
+	// canvas resizing will trigger this call.
+	$: renderNetworkData(networkStore.getAllData(), width, height);
 </script>

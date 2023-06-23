@@ -101,16 +101,17 @@
 
 	onMount(async () => {
 		context = canvas.getContext('2d');
-		await tick(); // Await container mount
-		handleSize();
-		//await tick(); // Await size correction
 	});
 
 	$: if (context) {
 		context.fillStyle = color;
 	}
 
-	const handleSize = () => {
+	/**
+	 * @param {number} maxWidth
+	 * @param {number} maxHeight
+	 */
+	const handleSize = (maxWidth, maxHeight) => {
 		const widthPixelSize = Math.floor(maxWidth / widthPixels);
 		const heightPixelSize = Math.floor(maxHeight / heightPixels);
 		pixelSize = Math.max(Math.min(widthPixelSize, heightPixelSize), 3);
@@ -119,23 +120,28 @@
 		// console.log('size', maxWidth, maxHeight, pixelSize, width, height);
 	};
 
+	// React to container resize
+	$: handleSize(maxWidth, maxHeight);
+
 	/**
-	 * @param {number} x
-	 * @param {number} y
+	 * @param {MouseEvent} e
 	 */
-	const canvasToPixelCoordinates = (x, y) => {
+	const canvasToPixelCoordinates = (e) => {
+		const { offsetX: x, offsetY: y } = e;
+		// When the click is at the farthest border of a pixel,
+		// consider it as inside that pixel.
 		return {
 			x: Math.floor(x / pixelSize) - (x % pixelSize ? 0 : 1),
 			y: Math.floor(y / pixelSize) - (y % pixelSize ? 0 : 1)
 		};
 	};
 
+	// ------- Pointer events -------
 	/**
 	 * @param {MouseEvent} e
 	 */
 	const handleMouseDown = (e) => {
-		const { offsetX, offsetY } = e;
-		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
+		const { x, y } = canvasToPixelCoordinates(e);
 		tool?.onMouseDown(x, y, getPixelCanvasContext());
 	};
 
@@ -143,8 +149,7 @@
 	 * @param {MouseEvent} e
 	 */
 	const handleMouseMove = (e) => {
-		const { offsetX, offsetY } = e;
-		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
+		const { x, y } = canvasToPixelCoordinates(e);
 		tool?.onMouseMove(x, y, getPixelCanvasContext());
 	};
 
@@ -152,8 +157,7 @@
 	 * @param {MouseEvent} e
 	 */
 	const handleMouseUp = (e) => {
-		const { offsetX, offsetY } = e;
-		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
+		const { x, y } = canvasToPixelCoordinates(e);
 		tool?.onMouseUp(x, y, getPixelCanvasContext());
 	};
 
@@ -161,8 +165,7 @@
 	 * @param {MouseEvent} e
 	 */
 	const handleMouseLeave = (e) => {
-		const { offsetX, offsetY } = e;
-		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
+		const { x, y } = canvasToPixelCoordinates(e);
 		tool?.onMouseLeave(x, y, getPixelCanvasContext());
 	};
 </script>
@@ -178,7 +181,7 @@
 	on:mouseleave={handleMouseLeave}
 	style:cursor={`url('${tool?.icon}') ${tool?.cursorHotspot.x} ${tool?.cursorHotspot.y}, default`}
 />
-<slot />
+<slot {width} {height} />
 
 <style>
 	.pixelCanvas {

@@ -53,8 +53,15 @@
 	<main class="box-border grid h-full overflow-scroll px-10 md:grid-cols-6">
 		<div class="canvasBackground col-span-5">
 			<CanvasContainer let:maxWidth let:maxHeight>
-				<PixelCanvas {maxWidth} {maxHeight} widthPixels={WIDTH_PIXELS} heightPixels={HEIGHT_PIXELS}>
-					<NetworkCanvas />
+				<PixelCanvas
+					{maxWidth}
+					{maxHeight}
+					widthPixels={WIDTH_PIXELS}
+					heightPixels={HEIGHT_PIXELS}
+					let:width
+					let:height
+				>
+					<NetworkCanvas {height} {width} />
 				</PixelCanvas>
 
 				<PixelCanvas

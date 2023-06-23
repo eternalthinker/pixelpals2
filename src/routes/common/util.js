@@ -29,3 +29,19 @@ export function getURLParameter(query) {
 	const result = decodeURI(match[1]);
 	return result;
 }
+
+/**
+ * @param {Function} fn
+ */
+export function debounce(fn, delay = 300) {
+	/**
+	 * @type {ReturnType<typeof setTimeout>}
+	 */
+	let timer;
+
+	return (/** @type {any} */ ...args) => {
+		clearTimeout(timer);
+		// @ts-ignore
+		timer = setTimeout(() => fn.apply(this, args), delay);
+	};
+}
