@@ -184,12 +184,4 @@
 	.pixelCanvas {
 		image-rendering: pixelated;
 	}
-
-	.pencil {
-		cursor: url('/icons/pencil.svg') 0 20, default;
-	}
-
-	.colorPicker {
-		cursor: url('/icons/colorpicker.svg') 0 20, default;
-	}
 </style>
