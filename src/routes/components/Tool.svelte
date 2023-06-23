@@ -30,7 +30,7 @@
 </script>
 
 <button
-	class="flex h-10 w-10 items-center justify-center rounded border border-gray-800 {selected
+	class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 {selected
 		? 'selected bg-gray-400'
 		: 'bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200'}"
 	aria-pressed={selected}

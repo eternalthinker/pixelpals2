@@ -32,10 +32,12 @@
 </script>
 
 <div class="flex h-full flex-col bg-gray-500">
-	<header class="flex items-center justify-evenly bg-gray-800 px-8 py-2">
+	<header class="flex items-center justify-evenly gap-4 bg-gray-800 px-8 py-2">
 		<div class="flex flex-grow items-center gap-4">
 			<h1 class="font-display text-4xl font-bold text-white">PixelPals</h1>
-			<h3 class="pt-2 font-body text-lg text-white">A collaborative pixel canvas</h3>
+			<h3 class="hidden pt-2 font-body text-lg text-white md:block">
+				A collaborative pixel canvas
+			</h3>
 		</div>
 		<div class="flex-shrink">
 			<p class="pt-2 font-body text-sm text-gray-100">
@@ -48,7 +50,7 @@
 		</div>
 	</header>
 
-	<main class="box-border grid h-full flex-auto grid-cols-6 px-10">
+	<main class="box-border grid h-full overflow-scroll px-10 md:grid-cols-6">
 		<div class="canvasBackground col-span-5">
 			<CanvasContainer let:maxWidth let:maxHeight>
 				<PixelCanvas {maxWidth} {maxHeight} widthPixels={WIDTH_PIXELS} heightPixels={HEIGHT_PIXELS}>

@@ -113,7 +113,7 @@
 	const handleSize = () => {
 		const widthPixelSize = Math.floor(maxWidth / widthPixels);
 		const heightPixelSize = Math.floor(maxHeight / heightPixels);
-		pixelSize = Math.min(widthPixelSize, heightPixelSize);
+		pixelSize = Math.max(Math.min(widthPixelSize, heightPixelSize), 3);
 		width = pixelSize * widthPixels;
 		height = pixelSize * heightPixels;
 		// console.log('size', maxWidth, maxHeight, pixelSize, width, height);

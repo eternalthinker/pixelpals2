@@ -16,6 +16,6 @@
 	});
 </script>
 
-<div class="relative h-full" bind:this={container}>
+<div class="relative h-full min-h-[360px]" bind:this={container}>
 	<slot {maxWidth} {maxHeight} />
 </div>
