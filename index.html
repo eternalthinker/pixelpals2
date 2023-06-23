@@ -5,34 +5,37 @@
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		
-		<link href="./_app/immutable/assets/0.2d643e86.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/0.fac728e3.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/2.8a3a2093.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.4f890048.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.c2d3ce40.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.5e1f86c4.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.48859ccf.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.80c95a71.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.8a93f1c3.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.ac7dc865.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.09846a6b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c5b970cf.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.1771746f.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.714269cf.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.0ca6fcf5.js">
 	</head>
 	<body data-sveltekit-preload-data="hover" class="h-full">
 		<div style="display: contents">
 
 
-<div class="flex h-full flex-col bg-gray-500"><header class="flex items-center justify-evenly bg-gray-800 px-8 py-2"><div class="flex flex-grow items-center gap-4"><h1 class="font-display text-4xl font-bold text-white">PixelPals</h1>
-			<h3 class="pt-2 font-body text-lg text-white">A collaborative pixel canvas</h3></div>
+<div class="flex h-full flex-col bg-gray-500"><header class="flex items-center justify-evenly gap-4 bg-gray-800 px-8 py-2"><div class="flex flex-grow items-center gap-4"><h1 class="font-display text-4xl font-bold text-white">PixelPals</h1>
+			<h3 class="hidden pt-2 font-body text-lg text-white md:block">A collaborative pixel canvas
+			</h3></div>
 		<div class="flex-shrink"><p class="pt-2 font-body text-sm text-gray-100">Made by <a class="underline hover:text-teal-400" href="https://github.com/eternalthinker" target="_blank">eternalthinker</a></p></div></header>
 
-	<main class="box-border grid h-full flex-auto grid-cols-6 px-10"><div class="canvasBackground col-span-5"><div class="relative h-full"><canvas class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950 svelte-6ccob6" width="150" height="120"></canvas>
+	<main class="box-border grid h-full overflow-scroll px-10 md:grid-cols-6"><div class="canvasBackground col-span-5"><div class="relative h-full min-h-[360px]"><canvas class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950 svelte-6ccob6" width="450" height="360" style="cursor: url('undefined') undefined undefined, default;"></canvas>
 
 
-				<canvas class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950 svelte-6ccob6" width="150" height="120"></canvas>
+				<canvas class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950 svelte-6ccob6" width="450" height="360" style="cursor: url('/_app/immutable/assets/pencil.e3702aa4.svg') 0 20, default;"></canvas>
 </div></div>
 
-		<div class="sideBar flex flex-col justify-center gap-4 p-4"><section class="flex flex-wrap justify-center gap-2 rounded bg-white p-2"><button class="h-10 w-10 rounded border border-gray-800 selected bg-gray-400 svelte-85wnk6" aria-pressed="true" aria-current="true"><i class="fa-solid fa-pencil text-black svelte-85wnk6"></i>
-	<span class="sr-only">Select the Pencil tool</span>
+		<div class="sideBar flex flex-col justify-center gap-4 p-4"><section class="flex flex-wrap justify-center gap-2 rounded bg-white p-2"><button class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 selected bg-gray-400 svelte-85wnk6" aria-pressed="true" aria-current="true">
+	<img src="/_app/immutable/assets/pencil.e3702aa4.svg" alt="">
+	<span class="sr-only">Click to select Pencil tool, or press b</span>
 </button>
-				<button class="h-10 w-10 rounded border border-gray-800 bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200 svelte-85wnk6" aria-pressed="false"><i class="fa-solid fa-eye-dropper text-black svelte-85wnk6"></i>
-	<span class="sr-only">Select the ColorPicker tool</span>
+				<button class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200 svelte-85wnk6" aria-pressed="false">
+	<img src="/_app/immutable/assets/colorPicker.058b2d23.svg" alt="">
+	<span class="sr-only">Click to select ColorPicker tool, or press c</span>
 </button></section>
 			<section class="flex flex-wrap justify-center gap-1 rounded bg-white p-2"><button class="color relative h-6 w-6 shrink-0 cursor-pointer overflow-hidden rounded-sm false hover:hover focus:hover border border-gray-800 svelte-nxaqpj" aria-current="false" aria-pressed="false" style="background: #ff00ff;"><span class="sr-only">Select the color #ff00ff</span>
 		</button><button class="color relative h-6 w-6 shrink-0 cursor-pointer overflow-hidden rounded-sm false hover:hover focus:hover border border-gray-800 svelte-nxaqpj" aria-current="false" aria-pressed="false" style="background: #9400d3;"><span class="sr-only">Select the color #9400d3</span>
@@ -88,7 +91,7 @@
 			
 			<script>
 				{
-					__sveltekit_1j14yji = {
+					__sveltekit_z71ve8 = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
 					};
@@ -98,8 +101,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.4f890048.js"),
-						import("./_app/immutable/entry/app.48859ccf.js")
+						import("./_app/immutable/entry/start.ac7dc865.js"),
+						import("./_app/immutable/entry/app.1771746f.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
