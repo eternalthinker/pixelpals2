@@ -1,6 +1,7 @@
 import { pixelCoordsToNetworkKey } from '../common/util';
 import { networkStore } from '../network/networkStore';
 import { Tool, ToolType } from './tool';
+import colorPickerSvg from '$lib/icons/colorPicker.svg';
 
 export class ColorPicker extends Tool {
 	/**
@@ -9,6 +10,12 @@ export class ColorPicker extends Tool {
 	constructor(onColorChange) {
 		super();
 		this.name = 'ColorPicker';
+		this.keyTrigger = 'c';
+		this.icon = colorPickerSvg;
+		this.cursorHotspot = {
+			x: 0,
+			y: 20
+		};
 		this.type = ToolType.COLOR_PICKER;
 		this.drawing = false;
 		this.dragging = false;

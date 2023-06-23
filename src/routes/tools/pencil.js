@@ -1,11 +1,18 @@
 import { pixelCoordsToNetworkKey } from '../common/util';
 import { setNetworkPixel } from '../network/network';
 import { Tool, ToolType } from './tool';
+import pencilSvg from '$lib/icons/pencil.svg';
 
 export class Pencil extends Tool {
 	constructor() {
 		super();
 		this.name = 'Pencil';
+		this.keyTrigger = 'b';
+		this.icon = pencilSvg;
+		this.cursorHotspot = {
+			x: 0,
+			y: 20
+		};
 		this.type = ToolType.PENCIL;
 		this.drawing = false;
 		this.dragging = false;

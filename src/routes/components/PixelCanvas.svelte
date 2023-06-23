@@ -5,7 +5,6 @@
 	// @ts-ignore
 	// eslint-disable-next-line no-unused-vars
 	import * as Types from '../components/types';
-	import { ToolType } from '../tools/tool';
 
 	export let maxWidth = 0;
 	export let maxHeight = 0;
@@ -166,24 +165,10 @@
 		const { x, y } = canvasToPixelCoordinates(offsetX, offsetY);
 		tool?.onMouseLeave(x, y, getPixelCanvasContext());
 	};
-
-	// TODO: Move this data to the Tool
-	const getCursorClass = (/** @type {import("../tools/tool").Tool | undefined} */ tool) => {
-		switch (tool?.type) {
-			case ToolType.PENCIL:
-				return 'pencil';
-			case ToolType.COLOR_PICKER:
-				return 'colorPicker';
-			default:
-				return '';
-		}
-	};
-
-	$: cursorClass = getCursorClass(tool);
 </script>
 
 <canvas
-	class="pixelCanvas {cursorClass} absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950"
+	class="pixelCanvas absolute bottom-0 left-0 right-0 top-0 m-auto border-2 border-gray-950"
 	{width}
 	{height}
 	bind:this={canvas}
@@ -191,6 +176,7 @@
 	on:mousemove={handleMouseMove}
 	on:mouseup={handleMouseUp}
 	on:mouseleave={handleMouseLeave}
+	style:cursor={`url('${tool?.icon}') ${tool?.cursorHotspot.x} ${tool?.cursorHotspot.y}, default`}
 />
 <slot />
 

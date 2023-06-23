@@ -22,6 +22,12 @@ export class Tool {
 			throw new Error('Tool is an abstract class');
 		}
 		this.name = 'Undefined';
+		this.icon = 'Undefined';
+		this.cursorHotspot = {
+			x: 0,
+			y: 0
+		};
+		this.keyTrigger = 'Undefined';
 		this.type = ToolType.NONE;
 		this.drawing = false;
 		this.dragging = false;
