@@ -2,17 +2,18 @@
 <html lang="en" class="h-full">
 	<head>
 		<meta charset="utf-8" />
+		<title>Pixelpals - a collaborative pixel canvas</title>
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		
-		<link href="./_app/immutable/assets/0.fac728e3.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/2.8a3a2093.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.8d1fbbc5.js">
+		<link href="./_app/immutable/assets/0.d1c4e0f4.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/2.5a473599.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3a87dacf.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.09846a6b.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.6bdd7fc3.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.bda3a01c.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.714269cf.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.31a15e76.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.5dee046b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.d63672f6.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.f52c572c.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.751e0a1f.js">
 	</head>
 	<body data-sveltekit-preload-data="hover" class="h-full">
 		<div style="display: contents">
@@ -33,13 +34,13 @@
 
 		<div class="sideBar flex flex-col justify-center gap-4 p-4"><section class="flex flex-wrap justify-center gap-2 rounded bg-white p-2">
 
-<button class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 selected bg-gray-400 svelte-85wnk6" aria-pressed="true" aria-current="true">
+<button class="tool relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 selected bg-gray-400 svelte-15nsd7a" aria-pressed="true" aria-current="true" data-hint="Pencil [B]">
 	<img src="/_app/immutable/assets/pencil.e3702aa4.svg" alt="">
 	<span class="sr-only">Click to select Pencil tool, or press b</span>
 </button>
 				
 
-<button class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200 svelte-85wnk6" aria-pressed="false">
+<button class="tool relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-gray-800 bg-gray-300 hover:border-2 hover:bg-gray-200 focus:border-2 focus:bg-gray-200 svelte-15nsd7a" aria-pressed="false" data-hint="ColorPicker [C]">
 	<img src="/_app/immutable/assets/colorPicker.058b2d23.svg" alt="">
 	<span class="sr-only">Click to select ColorPicker tool, or press c</span>
 </button></section>
@@ -97,7 +98,7 @@
 			
 			<script>
 				{
-					__sveltekit_1nysel6 = {
+					__sveltekit_u01v6j = {
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
 					};
@@ -107,8 +108,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.8d1fbbc5.js"),
-						import("./_app/immutable/entry/app.bda3a01c.js")
+						import("./_app/immutable/entry/start.3a87dacf.js"),
+						import("./_app/immutable/entry/app.d63672f6.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
