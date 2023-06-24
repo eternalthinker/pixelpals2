@@ -30,6 +30,7 @@
 	aria-pressed={selected}
 	aria-current={selected ? true : undefined}
 	on:click={onClick}
+	title="{tool.name} [{tool.keyTrigger.toUpperCase()}]"
 >
 	<!-- <i class="{getIconClasses()} text-black" /> -->
 	<img src={tool.icon} alt="" />
